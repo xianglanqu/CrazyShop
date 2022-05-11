@@ -1,55 +1,59 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Layout, Menu } from 'antd';
-import {
-    UserOutlined,
-    // VideoCameraOutlined,
-    // UploadOutlined,
-} from '@ant-design/icons';
 import './index.css'
 import { useNavigate } from 'react-router-dom';
+import {
+    UserOutlined
+} from '@ant-design/icons';
+import axios from 'axios'
 const { Sider } = Layout;
+const { SubMenu } = Menu
 
-function getItem(label, key, icon, children) {
-    return {
-        key,
-        icon,
-        children,
-        label,
-    };
+const iconList = {
+    "/home": <UserOutlined />,
+    "/user-manage": <UserOutlined />,
+    "/user-manage/list": <UserOutlined />,
+    "/right-manage": <UserOutlined />,
+    "/right-manage/role/list": <UserOutlined />,
+    "/right-manage/right/list": <UserOutlined />
+    //.......
 }
-const items = [
-    getItem('首页', '/home', <UserOutlined />),
-    getItem('用户管理', '/user-manage', <UserOutlined />, [getItem('用户列表', '/user-manage/list')]),
-    getItem('权限管理', '/right-manage', <UserOutlined />, [getItem('角色列表', '/right-manage/role/list'), getItem('权限列表', '/right-manage/right/list')]),
-    getItem('新闻管理', 'sub1', <UserOutlined />, [
-        getItem('Tom', '/user-manage/userList'),
-        getItem('Bill', '4'),
-    ]),
-    // getItem('审核管理', 'sub1', <UserOutlined />, [
-    //     getItem('Tom', '/user-manage/list'),
-    //     getItem('Bill', '4'),
-    //     getItem('Alex', '5'),
-    // ]),
-    // getItem('发布管理', 'sub1', <UserOutlined />, [
-    //     getItem('Tom', '/user-manage/list'),
-    //     getItem('Bill', '4'),
-    //     getItem('Alex', '5'),
-    // ]),
-];
-export default function SideMenu() {
+
+
+function SideMenu(props) {
+    const [meun, setMeun] = useState([])
+    useEffect(() => {
+        axios.get("http://localhost:5000/rights?_embed=children").then(res => {
+            // console.log(res.data)
+            setMeun(res.data)
+        })
+    }, [])
+
+
+    const checkPagePermission = (item) => {
+        return item.pagepermisson
+    }
     const navigate = useNavigate()
+    const renderMenu = (menuList) => {
+        return menuList.map(item => {
+            if (item.children && checkPagePermission(item)) {
+                return <SubMenu key={item.key} icon={iconList[item.key]} title={item.title}>
+                    {renderMenu(item.children)}
+                </SubMenu>
+            }
+
+            return checkPagePermission(item) && <Menu.Item key={item.key} icon={iconList[item.key]} onClick={() => {
+                navigate(item.key)
+            }}>{item.title}</Menu.Item>
+        })
+    }
     return (
-        <Sider trigger={null} collapsible>
-            <div className="logo">Global News System</div>
-            <Menu
-                theme="dark"
-                mode="inline"
-                defaultSelectedKeys={['/home']}
-                items={items}
-                onClick={(info) => {
-                    navigate(info.key)
-                }}
-            />
+        <Sider trigger={null} collapsible collapsed={false}>
+            <div className="logo" >全球新闻发布管理系统</div>
+            <Menu theme="dark" mode="inline" defaultSelectedKeys={['3']}>
+                {renderMenu(meun)}
+            </Menu>
         </Sider>
     )
 }
+export default (SideMenu)
