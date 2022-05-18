@@ -23,8 +23,9 @@ const iconList = {
 function SideMenu(props) {
     const [menu, setMeun] = useState([])
     useEffect(() => {
-        axios.get("http://localhost:5000/rights?_embed=children").then(res => {
-            // console.log(res.data)
+        axios.get("http://localhost:5001/rights?_embed=children").then(res => {
+            //   console.log(res.data)
+
             setMeun(res.data)
         })
     }, [])
