@@ -18,11 +18,11 @@ export default function RoleList() {
             }
         },
         {
-            title: '角色名称',
+            title: 'Role Name',
             dataIndex: 'roleName'
         },
         {
-            title: "操作",
+            title: "Edit",
             render: (item) => {
                 return <div>
                     <Button danger shape="circle" icon={<DeleteOutlined />} onClick={() => confirmMethod(item)} />
@@ -38,7 +38,7 @@ export default function RoleList() {
 
     const confirmMethod = (item) => {
         confirm({
-            title: '你确定要删除?',
+            title: 'Are you sure you want to delete it?',
             icon: <ExclamationCircleOutlined />,
             // content: 'Some descriptions',
             onOk() {
@@ -51,7 +51,7 @@ export default function RoleList() {
         });
 
     }
-    //删除
+    //Delete
     const deleteMethod = (item) => {
         // console.log(item)
         setdataSource(dataSource.filter(data => data.id !== item.id))
@@ -77,7 +77,7 @@ export default function RoleList() {
     const handleOk = () => {
         console.log(currentRights, currentId)
         setisModalVisible(false)
-        //同步datasource
+        //meanwhile datasource
         setdataSource(dataSource.map(item => {
             if (item.id === currentId) {
                 return {
@@ -107,7 +107,7 @@ export default function RoleList() {
             <Table dataSource={dataSource} columns={columns}
                 rowKey={(item) => item.id}></Table>
 
-            <Modal title="权限分配" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+            <Modal title="right distribution" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                 <Tree
                     checkable
                     checkedKeys={currentRights}

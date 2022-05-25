@@ -15,21 +15,21 @@ const UserForm = forwardRef((props, ref) => {
         >
             <Form.Item
                 name="username"
-                label="用户名"
+                label="username"
                 rules={[{ required: true, message: 'Please input the title of collection!' }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 name="password"
-                label="密码"
+                label="password"
                 rules={[{ required: true, message: 'Please input the title of collection!' }]}
             >
                 <Input />
             </Form.Item>
             <Form.Item
                 name="region"
-                label="区域"
+                label="region"
                 rules={isDisabled ? [] : [{ required: true, message: 'Please input the title of collection!' }]}
             >
                 <Select disabled={isDisabled}>
@@ -42,7 +42,7 @@ const UserForm = forwardRef((props, ref) => {
             </Form.Item>
             <Form.Item
                 name="roleId"
-                label="角色"
+                label="roleId"
                 rules={[{ required: true, message: 'Please input the title of collection!' }]}
             >
                 <Select onChange={(value) => {

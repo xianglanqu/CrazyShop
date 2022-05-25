@@ -25,25 +25,25 @@ export default function RightList() {
             }
         },
         {
-            title: '权限名称',
+            title: 'Right Name',
             dataIndex: 'title',
         },
         {
-            title: '权限路径',
+            title: 'Right Path',
             dataIndex: 'key',
             render: (key) => {
                 return <Tag color="orange">{key}</Tag>
             }
         },
         {
-            title: '操作',
+            title: 'Edit',
             // dataIndex: 'key',
             render: (item) => {
                 return <div>
                     <Button danger shape="circle" icon={<DeleteOutlined />} onClick={() => confirmMethod(item)} />
                     <Popover content={<div style={{ textAlign: "center" }}>
                         <Switch checked={item.pagepermisson} onChange={() => switchMethod(item)}></Switch>
-                    </div>} title="页面配置项" trigger={item.pagepermisson === undefined ? '' : 'click'}>
+                    </div>} title="Page Configuration items" trigger={item.pagepermisson === undefined ? '' : 'click'}>
                         <Button type="primary" shape="circle" icon={<EditOutlined />} disabled={item.pagepermisson === undefined} />
                     </Popover>
                 </div>
@@ -67,7 +67,7 @@ export default function RightList() {
     }
     const confirmMethod = (item) => {
         confirm({
-            title: '你确定要删除?',
+            title: 'Are you sure you want to delete it?',
             icon: <ExclamationCircleOutlined />,
             // content: 'Some descriptions',
             onOk() {
@@ -82,7 +82,7 @@ export default function RightList() {
     }
     const deleteMethod = (item) => {
         // console.log(item)
-        // 当前页面同步状态 + 后端同步
+        // Current page synchronization status + back-end synchronization
         if (item.grade === 1) {
             setdataSource(dataSource.filter(data => data.id !== item.id))
             axios.delete(`http://localhost:5001/rights/${item.id}`)

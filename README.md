@@ -1,2 +1,3 @@
-# Global News Background Management System
-This project is for developing a Backstage Management SPA, which adopt the pattern of separation of frontend and backend.  It Includes user management, commodity classification management, commodity management, rights management and other functional modules.
+# Global News Management System
+
+This project is for developing a Backstage Management SPA, which adopt the pattern of separation of frontend and backend.  It Includes user management, Background administrative personnel authority system,  and other functional modules.
