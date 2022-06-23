@@ -10,11 +10,11 @@
       "roleId": 1
     },
     {
-      "username": "Alice",
-      "password": "123",
+      "username": "quxianglan55@gmail.com",
+      "password": "123456",
       "roleState": true,
       "default": false,
-      "region": "Asia",
+      "region": "Europe",
       "roleId": 2,
       "id": 2
     },
@@ -330,12 +330,12 @@
       "id": 2,
       "title": "User Manage",
       "key": "/user-manage",
-      "pagepermisson": 1,
+      "pagepermisson": 0,
       "grade": 1
     },
     {
       "id": 7,
-      "title": "Righr Manage",
+      "title": "Right Manage",
       "key": "/right-manage",
       "pagepermisson": 1,
       "grade": 1
